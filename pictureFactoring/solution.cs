@@ -262,7 +262,8 @@ namespace pictureFactoring
                     {
                         removed = true;
                     }
-                    else if ((n[1] && n[0]) || 
+                    else if (
+                        (n[1] && n[0]) || 
                         (n[1] && n[2]) ||
                         (n[4] && n[2]) ||
                         (n[4] && n[7]) ||
@@ -277,7 +278,8 @@ namespace pictureFactoring
                 else if (count_n > 2 && count_n < 6)
                 {
                     
-                    if ((n[0] && n[1] && n[2] && !n[5] && !n[6] && !n[7]) ||
+                    if (
+                        (n[0] && n[1] && n[2] && !n[5] && !n[6] && !n[7]) ||
                         (n[0] && n[3] && n[5] && !n[2] && !n[4] && !n[7]) ||
                         (n[7] && n[6] && n[5] && !n[0] && !n[1] && !n[2]) ||
                         (n[7] && n[4] && n[2] && !n[5] && !n[3] && !n[0]))
@@ -286,14 +288,16 @@ namespace pictureFactoring
                     }
                     else if (count_n == 3)
                     {
-                        if ((n[0] && n[1] && n[3]) || 
+                        if (
+                            (n[0] && n[1] && n[3]) || 
                             (n[4] && n[1] && n[2]) || 
                             (n[4] && n[7] && n[6]) || 
                             (n[3] && n[5] && n[6]))
                         {
                             removed = true;
                         }
-                        else if ((n[3] && n[1] && n[2]) ||
+                        else if (
+                            (n[3] && n[1] && n[2]) ||
                             (n[3] && n[6] && n[7]) ||
                             (n[1] && n[3] && n[5]) ||
                             (n[1] && n[4] && n[7]) ||
@@ -346,7 +350,11 @@ namespace pictureFactoring
                 }
             }
         }
-
+        /// <summary>
+        /// Является ли точка угловой по массиву соседей 
+        /// </summary>
+        /// <param name="n">массив соседей</param>
+        /// <returns></returns>
         bool has_angle (bool[] n)
         {
             if ((n[3] && n[0] && n[1]) || (n[1] && n[2] && n[4]) || (n[4] && n[7] && n[6]) || (n[3] && n[5] && n[6]))
@@ -384,15 +392,25 @@ namespace pictureFactoring
                 return false; //не связывает, можно удалять
             }
         }
-
+        /// <summary>
+        /// набор шаблонов заметаемых кругов заданного радиуса,
+        /// чтобы не вычислять каждый раз
+        /// </summary>
         Dictionary<int, bool[,]> round_templates = new Dictionary<int, bool[,]>();
-
+        /// <summary>
+        /// инициируем набор шаблонов нулевым радиусом с 1 точкой
+        /// </summary>
         void add_round_templates ()
         {
             bool[,] temp_arr = {{ true }};
             round_templates.Add(0, temp_arr);
         }
-
+        /// <summary>
+        /// возвращает шаблон круга нужного радиуса
+        /// если нужного шаблона нет, генерирует его
+        /// </summary>
+        /// <param name="radius">радиус круга</param>
+        /// <returns></returns>
         public bool[,] get_round_template (int radius)
         {
             if (!round_templates.ContainsKey(radius))
@@ -402,7 +420,6 @@ namespace pictureFactoring
             return round_templates[radius];
         }
         
-
         /// <summary>
         /// Добавляет шаблон радиуса r
         /// </summary>
@@ -421,34 +438,6 @@ namespace pictureFactoring
             }
             round_templates.Add(r, temp_arr);
         }
-
-        //public List<Point> get_skelet()
-        //{
-        //    return skelet;
-        //}
-
-        //private List<Point> skelet = new List<Point>();
-
-        //public bool new_point = true;
-        //public void make_skelet()
-        //{
-        //    new_point = false;
-        //    foreach (var border in borders)
-        //    {
-        //        foreach (var point in border.get_points())
-        //        {
-        //            if (count_true_neighbors(point) < 3)
-        //            {
-        //                skelet.Add(point);
-        //                new_point = true;
-        //            }
-        //            bin_map[point.X, point.Y] = false;
-        //        }
-        //    }
-        //}
-
-        //public bool deleted = true;
-        //int er_count = 0;
 
         /// <summary>
         /// шаг скелетизации (проверка точек в граничном слое по шаблону)
@@ -469,100 +458,10 @@ namespace pictureFactoring
             return deleted;
         }
 
-
-        public bool deleted_skel = true;
- 
-        public List<Point> tops;
-        public List<Point> cros;
-        //public List<Point> skeleton;
-
-        //public void bord_analise()
-        //{
-        //    tops = new List<Point>();
-        //    cros = new List<Point>();
-        //    foreach (var point in skeleton)
-        //    {
-        //        var c = count_true_neighbors(point);
-        //        if (c == 1)
-        //        {
-        //            tops.Add(point);
-        //        }
-        //        if (c > 2)
-        //        {
-        //            cros.Add(point);
-
-
-        //        }
-        //    }
-        //    if (tops.Count > 0)
-        //    {
-        //        bool recursion = false;
-        //        foreach (var top in tops)
-        //        {
-        //            local_tops = new List<Point>();
-        //            local_tops.AddRange(tops);
-        //            local_tops.Remove(top);
-        //            curr_brunch = new List<Point>();
-        //            curr_brunch.Add(top);
-        //            curr_brunch_lenth = 0;
-        //            branch_finded = false;
-        //            find_neighbors(top);
-        //            if (curr_brunch_lenth < 20)
-        //            {
-        //                foreach (var p in curr_brunch)
-        //                {
-        //                    skeleton.Remove(p);
-        //                }
-        //                recursion = true;
-        //                break;
-        //            }
-        //        }
-        //        if (recursion)
-        //        {
-        //            bord_analise();
-        //        }
-        //    }
-        //}
-
-        //List<Point> curr_brunch;
-        //List<Point> local_tops;
-        //int curr_brunch_lenth;
-        //bool branch_finded = false;
-        //private void find_neighbors (Point p)
-        //{
-        //    if (branch_finded)
-        //    {
-        //        return;
-        //    }
-        //    var neibs = get_true_neighbors(p);
-        //    bool is_spesial_neighbor = false;
-        //    bool is_in_branch = false;
-        //    foreach (var n in neibs)
-        //    {
-        //        if (local_tops.Contains(n) || cros.Contains(n))
-        //        {
-        //            is_spesial_neighbor = true;
-        //        }
-        //        if (curr_brunch.Contains(n))
-        //        {
-        //            is_in_branch = true;
-        //        }
-        //        if (is_spesial_neighbor)
-        //        {
-        //            branch_finded = true;
-        //            return;
-        //        }
-        //        if (!is_in_branch && !is_spesial_neighbor)
-        //        {
-        //            curr_brunch_lenth++;
-        //            curr_brunch.Add(n);
-        //            //MessageBox.Show(n.X + " "+ n.Y);
-        //            find_neighbors(n);
-        //        }
-        //    }
-        //}
-
-        //точка попадает под шаблон
+        public List<Point> tops; //список вершин 
+        public List<Point> cros; //список пересечений
+        
+        //точка попадает под шаблон - её можно удалить при шаге скелетизации
         private bool templ(Point point)
         {
             var n = get_neighbor_values(point);
@@ -598,30 +497,32 @@ namespace pictureFactoring
             }
             return false;
         }
-        
-        private bool ts(Point point, List<int> nums)
-        {
-            var n = get_neighbor_values(point);
-            if
-                (
-                    (n[1] && n[4] && !n[3] && !n[5] && !n[6]) ||
-                    (n[1] && n[3] && !n[4] && !n[7] && !n[6]) ||
-                    (n[3] && n[6] && !n[1] && !n[2] && !n[4]) ||
-                    (n[4] && n[6] && !n[0] && !n[1] && !n[3]) ||
-                    (n[1] && n[4] && n[6] && !n[0] && !n[3] && !n[5]) ||
-                    (n[3] && n[1] && n[4] && !n[5] && !n[6] && !n[7]) ||
-                    (n[3] && n[4] && n[6] && !n[0] && !n[1] && !n[2]) ||
-                    (n[1] && n[3] && n[6] && !n[2] && !n[4] && !n[7])
-                )
+        //ещё один шаблон (для чистки?), не используется
+        /*/
+            private bool ts(Point point, List<int> nums)
             {
-                return true;
+                var n = get_neighbor_values(point);
+                if
+                    (
+                        (n[1] && n[4] && !n[3] && !n[5] && !n[6]) ||
+                        (n[1] && n[3] && !n[4] && !n[7] && !n[6]) ||
+                        (n[3] && n[6] && !n[1] && !n[2] && !n[4]) ||
+                        (n[4] && n[6] && !n[0] && !n[1] && !n[3]) ||
+                        (n[1] && n[4] && n[6] && !n[0] && !n[3] && !n[5]) ||
+                        (n[3] && n[1] && n[4] && !n[5] && !n[6] && !n[7]) ||
+                        (n[3] && n[4] && n[6] && !n[0] && !n[1] && !n[2]) ||
+                        (n[1] && n[3] && n[6] && !n[2] && !n[4] && !n[7])
+                    )
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
-        }
+        /*/
         /// <summary>
         /// Первый раз ищем границы или нет
         /// </summary>
-        bool first = true;
+        bool first_bord_search = true;
         /// <summary>
         /// Записывает в borders текущие границы (с binmap)
         /// </summary>
@@ -643,12 +544,12 @@ namespace pictureFactoring
                    
                 }
             }
-            if (first)
+            if (first_bord_search)
             {
                 first_borders = new List<Point>();
                 first_borders.AddRange(borders);
                 //full_buitifier_group(first_borders, false)
-                first = false;
+                first_bord_search = false;
             }
         }
 
@@ -954,7 +855,12 @@ namespace pictureFactoring
             neighbors.Add(new Point(p.X + 1, p.Y + 1));
             return neighbors;
         }
-
+        /// <summary>
+        /// Массив "соседей" данной точки
+        /// </summary>
+        /// <param name="x">X центра</param>
+        /// <param name="y">Y центра</param>
+        /// <returns></returns>
         bool[] get_neighbor_values_arr(int x, int y)
         {
             bool[] res = 

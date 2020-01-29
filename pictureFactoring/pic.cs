@@ -49,13 +49,31 @@ namespace pictureFactoring
             picture.Invalidate();
         }
 
-
+        private Point settings_gb_coord1 = new Point (0, 0);
+        private Point settings_gb_coord2 = new Point(0, 0);
 
         private void run_TSMI_Click(object sender, EventArgs e)
         {
+            template_GB.Enabled = false;
+            draw_mode = false;
+            run_TSMI.Enabled = false;
+            picture.Refresh();
+            if (settings_gb_coord1.X == 0 && settings_gb_coord1.Y == 0)
+            {
+                settings_gb_coord1 = settings_draw_gb.Location;
+                settings_gb_coord2 = settings_sol_gb.Location;
+            }
+            move_gb(settings_draw_gb, false, settings_gb_coord2);
+            move_gb(settings_sol_gb, true, settings_gb_coord1);
             skeletization.solve(this);
         }
 
+        private void move_gb (GroupBox gb, bool visible, Point location)
+        {
+            gb.Visible = visible;
+            gb.Enabled = visible;
+            gb.Location = location;
+        }
 
         public static class skeletization
         {
@@ -66,13 +84,12 @@ namespace pictureFactoring
             static int[] sharp;
             static int[] skel_array;
             static solution.template curr_template;
+            static public bool sol_begin = false;
 
             public static void solve(main_form form)
             {
-                form.template_GB.Enabled = false;
-                form.draw_mode = false;
-                form.run_TSMI.Enabled = false;
-                form.picture.Refresh();
+                sol_begin = true;
+
                 sol = new solution(form.bmp);
                 sol.load_templates();
                 g = Graphics.FromImage(form.picture.Image);
@@ -94,7 +111,8 @@ namespace pictureFactoring
                 while (sol.iteration(r)) //пока есть точки, которые можно удалить
                 {
                     form.paint(0, 0, true); //очищаем экран
-                    form.draw_group(g, sol.first_borders, Color.Blue); //рисуем внешнюю границу
+                    draw_border(form);
+                   
                     for (int i = 0; i < form.bmp.Width; i++) //рисуем оставшиеся точки 
                     {
                         for (int j = 0; j < form.bmp.Height; j++)
@@ -137,21 +155,40 @@ namespace pictureFactoring
                     //draw_group(g, sol.added_points, Color.AntiqueWhite);
                 }
                 sol.tops_cros_update(skel_mod); //поиск вершин и пересечений
-
-                form.draw_points(g, sol.cros, Color.Green); //пересечения - обвод
-                form.draw_points(g, sol.tops, Color.Yellow); //вершины - обвод
-
-                form.draw_group(g, skel_mod, Color.Gray); //скелет
-                form.draw_group(g, sol.cros, Color.Red); //точки пересечения
-                form.draw_group(g, sol.tops, Color.Pink); //точки вершин
-
-                form.draw_group(g, sol.first_borders, Color.Blue); //первичная граница
-
                 sharp = sol.get_sharp(skel_mod);
-                form.draw_sharp(g, sharp, Color.MediumPurple); //отрисовываем решётку
+
+                refresh_picture_points(form);
 
                 skel_array = sol.get_skel_array(sharp, sol.tops, sol.cros); //массив-идентификатор особых точек
                 find_templ(form);
+            }
+            public static void refresh_picture_points(main_form form)
+            {
+                form.paint(0, 0, true); //очищаем экран
+                if (form.display_cros_chb.Checked)
+                    form.draw_points(g, sol.cros, Color.Green); //пересечения - обвод
+                if (form.display_end_chb.Checked)
+                    form.draw_points(g, sol.tops, Color.Yellow); //вершины - обвод
+                if (form.display_skel_chb.Checked)
+                    form.draw_group(g, skel_mod, Color.Gray); //скелет
+                if (form.display_cros_chb.Checked)
+                    form.draw_group(g, sol.cros, Color.Red); //точки пересечения
+                if (form.display_end_chb.Checked)
+                    form.draw_group(g, sol.tops, Color.Pink); //точки вершин
+                draw_border(form); //границы
+                if (form.display_sharp_chb.Checked)
+                    form.draw_sharp(g, sharp, Color.MediumPurple); //отрисовываем решётку
+            }
+            /// <summary>
+            /// Рисуем край фигуры
+            /// </summary>
+            /// <param name="form"></param>
+            public static void draw_border (main_form form)
+            {
+                if (form.display_bord_chb.Checked)
+                {
+                    form.draw_group(g, sol.first_borders, Color.Blue); //рисуем внешнюю границу
+                }
             }
 
             public static void find_templ (main_form form)
@@ -211,6 +248,9 @@ namespace pictureFactoring
 
         private void clear_TSMI_Click(object sender, EventArgs e)
         {
+            move_gb(settings_sol_gb, false, settings_gb_coord2);
+            move_gb(settings_draw_gb, true, settings_gb_coord1);
+            skeletization.sol_begin = false;
             paint(0, 0, true);
             draw_mode = true;
             run_TSMI.Enabled = true;
@@ -298,6 +338,21 @@ namespace pictureFactoring
         private void remove_BTN_Click(object sender, EventArgs e)
         {
             skeletization.remove_templ(this);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void main_form_Load(object sender, EventArgs e)
+        {
+            Width = settings_draw_gb.Location.X + settings_draw_gb.Size.Width + 30;
+        }
+
+        private void display_bord_chb_CheckedChanged(object sender, EventArgs e)
+        {
+            skeletization.refresh_picture_points(this);
         }
     }
 }
