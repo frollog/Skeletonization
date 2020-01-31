@@ -40,6 +40,8 @@
             this.coord_x = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.coord_y = new System.Windows.Forms.ToolStripStatusLabel();
+            this.zoom_out = new System.Windows.Forms.ToolStripStatusLabel();
+            this.zoom_in = new System.Windows.Forms.ToolStripStatusLabel();
             this.picture = new System.Windows.Forms.PictureBox();
             this.size_NUD = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,14 +58,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.display_bord_chb = new System.Windows.Forms.CheckBox();
             this.settings_sol_gb = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.display_end_chb = new System.Windows.Forms.CheckBox();
+            this.display_dots_chb = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.display_cros_chb = new System.Windows.Forms.CheckBox();
             this.display_sharp_chb = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.display_skel_chb = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.display_cros_chb = new System.Windows.Forms.CheckBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.display_end_chb = new System.Windows.Forms.CheckBox();
+            this.zoom_perc = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
@@ -72,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_NUD)).BeginInit();
             this.template_GB.SuspendLayout();
             this.settings_sol_gb.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -116,34 +123,37 @@
             this.toolStripStatusLabel1,
             this.coord_x,
             this.toolStripStatusLabel3,
-            this.coord_y});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 304);
+            this.coord_y,
+            this.zoom_out,
+            this.zoom_perc,
+            this.zoom_in});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 302);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(833, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(833, 24);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // label_TSM
             // 
             this.label_TSM.Name = "label_TSM";
-            this.label_TSM.Size = new System.Drawing.Size(66, 17);
+            this.label_TSM.Size = new System.Drawing.Size(66, 19);
             this.label_TSM.Text = "Состояние";
             // 
             // pb
             // 
             this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(100, 16);
+            this.pb.Size = new System.Drawing.Size(100, 18);
             // 
             // value_TSM
             // 
             this.value_TSM.Name = "value_TSM";
-            this.value_TSM.Size = new System.Drawing.Size(12, 17);
+            this.value_TSM.Size = new System.Drawing.Size(12, 19);
             this.value_TSM.Text = "-";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(14, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(14, 19);
             this.toolStripStatusLabel1.Text = "X";
             // 
             // coord_x
@@ -151,14 +161,14 @@
             this.coord_x.AutoSize = false;
             this.coord_x.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.coord_x.Name = "coord_x";
-            this.coord_x.Size = new System.Drawing.Size(40, 17);
+            this.coord_x.Size = new System.Drawing.Size(40, 19);
             this.coord_x.Text = "0";
             this.coord_x.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(14, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(14, 19);
             this.toolStripStatusLabel3.Text = "Y";
             // 
             // coord_y
@@ -166,9 +176,31 @@
             this.coord_y.AutoSize = false;
             this.coord_y.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.coord_y.Name = "coord_y";
-            this.coord_y.Size = new System.Drawing.Size(40, 17);
+            this.coord_y.Size = new System.Drawing.Size(40, 19);
             this.coord_y.Text = "0";
             this.coord_y.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // zoom_out
+            // 
+            this.zoom_out.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.zoom_out.Enabled = false;
+            this.zoom_out.Name = "zoom_out";
+            this.zoom_out.Size = new System.Drawing.Size(16, 19);
+            this.zoom_out.Text = "-";
+            this.zoom_out.Click += new System.EventHandler(this.zoom_out_Click);
+            // 
+            // zoom_in
+            // 
+            this.zoom_in.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.zoom_in.Enabled = false;
+            this.zoom_in.Name = "zoom_in";
+            this.zoom_in.Size = new System.Drawing.Size(19, 19);
+            this.zoom_in.Text = "+";
+            this.zoom_in.Click += new System.EventHandler(this.zoom_in_Click);
             // 
             // picture
             // 
@@ -327,7 +359,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 15);
+            this.label3.Location = new System.Drawing.Point(36, 30);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 13);
             this.label3.TabIndex = 4;
@@ -339,7 +371,7 @@
             this.display_bord_chb.AutoSize = true;
             this.display_bord_chb.Checked = true;
             this.display_bord_chb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.display_bord_chb.Location = new System.Drawing.Point(169, 15);
+            this.display_bord_chb.Location = new System.Drawing.Point(155, 30);
             this.display_bord_chb.Name = "display_bord_chb";
             this.display_bord_chb.Size = new System.Drawing.Size(15, 14);
             this.display_bord_chb.TabIndex = 5;
@@ -348,16 +380,7 @@
             // 
             // settings_sol_gb
             // 
-            this.settings_sol_gb.Controls.Add(this.display_end_chb);
-            this.settings_sol_gb.Controls.Add(this.label9);
-            this.settings_sol_gb.Controls.Add(this.display_cros_chb);
-            this.settings_sol_gb.Controls.Add(this.label8);
-            this.settings_sol_gb.Controls.Add(this.display_skel_chb);
-            this.settings_sol_gb.Controls.Add(this.label7);
-            this.settings_sol_gb.Controls.Add(this.display_sharp_chb);
-            this.settings_sol_gb.Controls.Add(this.label6);
-            this.settings_sol_gb.Controls.Add(this.display_bord_chb);
-            this.settings_sol_gb.Controls.Add(this.label3);
+            this.settings_sol_gb.Controls.Add(this.panel1);
             this.settings_sol_gb.Location = new System.Drawing.Point(532, 30);
             this.settings_sol_gb.Name = "settings_sol_gb";
             this.settings_sol_gb.Size = new System.Drawing.Size(236, 113);
@@ -366,32 +389,119 @@
             this.settings_sol_gb.Text = "Настройки";
             this.settings_sol_gb.Visible = false;
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.display_end_chb);
+            this.panel1.Controls.Add(this.display_dots_chb);
+            this.panel1.Controls.Add(this.display_bord_chb);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.display_cros_chb);
+            this.panel1.Controls.Add(this.display_sharp_chb);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.display_skel_chb);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(6, 16);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(227, 94);
+            this.panel1.TabIndex = 7;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(62, 10);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Обводить точки";
+            this.label10.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // display_end_chb
+            // 
+            this.display_end_chb.AutoSize = true;
+            this.display_end_chb.Checked = true;
+            this.display_end_chb.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.display_end_chb.Location = new System.Drawing.Point(155, 110);
+            this.display_end_chb.Name = "display_end_chb";
+            this.display_end_chb.Size = new System.Drawing.Size(15, 14);
+            this.display_end_chb.TabIndex = 5;
+            this.display_end_chb.UseVisualStyleBackColor = true;
+            this.display_end_chb.CheckedChanged += new System.EventHandler(this.display_bord_chb_CheckedChanged);
+            // 
+            // display_dots_chb
+            // 
+            this.display_dots_chb.AutoSize = true;
+            this.display_dots_chb.Checked = true;
+            this.display_dots_chb.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.display_dots_chb.Location = new System.Drawing.Point(155, 10);
+            this.display_dots_chb.Name = "display_dots_chb";
+            this.display_dots_chb.Size = new System.Drawing.Size(15, 14);
+            this.display_dots_chb.TabIndex = 5;
+            this.display_dots_chb.UseVisualStyleBackColor = true;
+            this.display_dots_chb.CheckedChanged += new System.EventHandler(this.display_bord_chb_CheckedChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(47, 110);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(102, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Отобразить концы";
+            this.label9.Click += new System.EventHandler(this.label3_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(65, 35);
+            this.label6.Location = new System.Drawing.Point(51, 50);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(98, 13);
             this.label6.TabIndex = 4;
             this.label6.Text = "Отобразить сетку";
             this.label6.Click += new System.EventHandler(this.label3_Click);
             // 
+            // display_cros_chb
+            // 
+            this.display_cros_chb.AutoSize = true;
+            this.display_cros_chb.Checked = true;
+            this.display_cros_chb.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.display_cros_chb.Location = new System.Drawing.Point(155, 90);
+            this.display_cros_chb.Name = "display_cros_chb";
+            this.display_cros_chb.Size = new System.Drawing.Size(15, 14);
+            this.display_cros_chb.TabIndex = 5;
+            this.display_cros_chb.UseVisualStyleBackColor = true;
+            this.display_cros_chb.CheckedChanged += new System.EventHandler(this.display_bord_chb_CheckedChanged);
+            // 
             // display_sharp_chb
             // 
             this.display_sharp_chb.AutoSize = true;
             this.display_sharp_chb.Checked = true;
             this.display_sharp_chb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.display_sharp_chb.Location = new System.Drawing.Point(169, 35);
+            this.display_sharp_chb.Location = new System.Drawing.Point(155, 50);
             this.display_sharp_chb.Name = "display_sharp_chb";
             this.display_sharp_chb.Size = new System.Drawing.Size(15, 14);
             this.display_sharp_chb.TabIndex = 5;
             this.display_sharp_chb.UseVisualStyleBackColor = true;
             this.display_sharp_chb.CheckedChanged += new System.EventHandler(this.display_bord_chb_CheckedChanged);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(14, 90);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(135, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Отобразить пересечения";
+            this.label8.Click += new System.EventHandler(this.label3_Click);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(58, 55);
+            this.label7.Location = new System.Drawing.Point(44, 70);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(105, 13);
             this.label7.TabIndex = 4;
@@ -403,56 +513,18 @@
             this.display_skel_chb.AutoSize = true;
             this.display_skel_chb.Checked = true;
             this.display_skel_chb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.display_skel_chb.Location = new System.Drawing.Point(169, 55);
+            this.display_skel_chb.Location = new System.Drawing.Point(155, 70);
             this.display_skel_chb.Name = "display_skel_chb";
             this.display_skel_chb.Size = new System.Drawing.Size(15, 14);
             this.display_skel_chb.TabIndex = 5;
             this.display_skel_chb.UseVisualStyleBackColor = true;
             this.display_skel_chb.CheckedChanged += new System.EventHandler(this.display_bord_chb_CheckedChanged);
             // 
-            // label8
+            // zoom_perc
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 75);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(135, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Отобразить пересечения";
-            this.label8.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // display_cros_chb
-            // 
-            this.display_cros_chb.AutoSize = true;
-            this.display_cros_chb.Checked = true;
-            this.display_cros_chb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.display_cros_chb.Location = new System.Drawing.Point(169, 75);
-            this.display_cros_chb.Name = "display_cros_chb";
-            this.display_cros_chb.Size = new System.Drawing.Size(15, 14);
-            this.display_cros_chb.TabIndex = 5;
-            this.display_cros_chb.UseVisualStyleBackColor = true;
-            this.display_cros_chb.CheckedChanged += new System.EventHandler(this.display_bord_chb_CheckedChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(61, 95);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Отобразить концы";
-            this.label9.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // display_end_chb
-            // 
-            this.display_end_chb.AutoSize = true;
-            this.display_end_chb.Checked = true;
-            this.display_end_chb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.display_end_chb.Location = new System.Drawing.Point(169, 95);
-            this.display_end_chb.Name = "display_end_chb";
-            this.display_end_chb.Size = new System.Drawing.Size(15, 14);
-            this.display_end_chb.TabIndex = 5;
-            this.display_end_chb.UseVisualStyleBackColor = true;
-            this.display_end_chb.CheckedChanged += new System.EventHandler(this.display_bord_chb_CheckedChanged);
+            this.zoom_perc.Name = "zoom_perc";
+            this.zoom_perc.Size = new System.Drawing.Size(25, 19);
+            this.zoom_perc.Text = "100";
             // 
             // main_form
             // 
@@ -487,7 +559,8 @@
             this.template_GB.ResumeLayout(false);
             this.template_GB.PerformLayout();
             this.settings_sol_gb.ResumeLayout(false);
-            this.settings_sol_gb.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -531,6 +604,12 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox display_skel_chb;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox display_dots_chb;
+        private System.Windows.Forms.ToolStripStatusLabel zoom_out;
+        private System.Windows.Forms.ToolStripStatusLabel zoom_in;
+        private System.Windows.Forms.ToolStripStatusLabel zoom_perc;
     }
 }
 

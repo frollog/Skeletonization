@@ -165,9 +165,9 @@ namespace pictureFactoring
             public static void refresh_picture_points(main_form form)
             {
                 form.paint(0, 0, true); //очищаем экран
-                if (form.display_cros_chb.Checked)
+                if (form.display_cros_chb.Checked && form.display_dots_chb.Checked)
                     form.draw_points(g, sol.cros, Color.Green); //пересечения - обвод
-                if (form.display_end_chb.Checked)
+                if (form.display_end_chb.Checked && form.display_dots_chb.Checked)
                     form.draw_points(g, sol.tops, Color.Yellow); //вершины - обвод
                 if (form.display_skel_chb.Checked)
                     form.draw_group(g, skel_mod, Color.Gray); //скелет
@@ -353,6 +353,16 @@ namespace pictureFactoring
         private void display_bord_chb_CheckedChanged(object sender, EventArgs e)
         {
             skeletization.refresh_picture_points(this);
+        }
+
+        private void zoom_out_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void zoom_in_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
