@@ -91,7 +91,7 @@ namespace pictureFactoring
                 sol_begin = true;
 
                 sol = new solution(form.bmp);
-                sol.load_templates();
+                sol.load_templates(form);
                 g = Graphics.FromImage(form.picture.Image);
 
                 sol.find_borders(); //ищем границы
@@ -211,19 +211,27 @@ namespace pictureFactoring
                     form.num_NUD.Enabled = true;
                 }
             }
-
+            public static void update_templ_count(main_form form)
+            {
+                form.templ_count.Text = sol.templates.Count.ToString();
+            }
+            /// <summary>
+            /// Добавляем новый шаблон
+            /// </summary>
+            /// <param name="form"></param>
             public static void add_templ (main_form form)
             {
                 if (skel_array != null && sol != null)
                 {
                     sol.add_template((int)form.num_NUD.Value, skel_array);
                     sol.save_templates(sol.templates);
-                    sol.load_templates();
+                    sol.load_templates(form);
                     find_templ(form);
+                    update_templ_count(form);
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка");
+                    MessageBox.Show("Ошибка! попытка добавления шаблона для пустого содержимого");
                 }
             }
 
@@ -233,12 +241,13 @@ namespace pictureFactoring
                 {
                     sol.templates.Remove(curr_template);
                     sol.save_templates(sol.templates);
-                    sol.load_templates();
+                    sol.load_templates(form);
                     find_templ(form);
+                    update_templ_count(form);
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка");
+                    MessageBox.Show("Ошибка! Не найдено шаблонов");
                 }
             }
         }

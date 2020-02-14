@@ -41,6 +41,7 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.coord_y = new System.Windows.Forms.ToolStripStatusLabel();
             this.zoom_out = new System.Windows.Forms.ToolStripStatusLabel();
+            this.zoom_perc = new System.Windows.Forms.ToolStripStatusLabel();
             this.zoom_in = new System.Windows.Forms.ToolStripStatusLabel();
             this.picture = new System.Windows.Forms.PictureBox();
             this.size_NUD = new System.Windows.Forms.NumericUpDown();
@@ -69,7 +70,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.display_skel_chb = new System.Windows.Forms.CheckBox();
-            this.zoom_perc = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.templ_count = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
@@ -126,7 +128,9 @@
             this.coord_y,
             this.zoom_out,
             this.zoom_perc,
-            this.zoom_in});
+            this.zoom_in,
+            this.toolStripStatusLabel2,
+            this.templ_count});
             this.statusStrip1.Location = new System.Drawing.Point(0, 302);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(833, 24);
@@ -190,6 +194,12 @@
             this.zoom_out.Size = new System.Drawing.Size(16, 19);
             this.zoom_out.Text = "-";
             this.zoom_out.Click += new System.EventHandler(this.zoom_out_Click);
+            // 
+            // zoom_perc
+            // 
+            this.zoom_perc.Name = "zoom_perc";
+            this.zoom_perc.Size = new System.Drawing.Size(25, 19);
+            this.zoom_perc.Text = "100";
             // 
             // zoom_in
             // 
@@ -520,11 +530,17 @@
             this.display_skel_chb.UseVisualStyleBackColor = true;
             this.display_skel_chb.CheckedChanged += new System.EventHandler(this.display_bord_chb_CheckedChanged);
             // 
-            // zoom_perc
+            // toolStripStatusLabel2
             // 
-            this.zoom_perc.Name = "zoom_perc";
-            this.zoom_perc.Size = new System.Drawing.Size(25, 19);
-            this.zoom_perc.Text = "100";
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(65, 19);
+            this.toolStripStatusLabel2.Text = "Шаблонов";
+            // 
+            // templ_count
+            // 
+            this.templ_count.Name = "templ_count";
+            this.templ_count.Size = new System.Drawing.Size(12, 19);
+            this.templ_count.Text = "-";
             // 
             // main_form
             // 
@@ -610,6 +626,8 @@
         private System.Windows.Forms.ToolStripStatusLabel zoom_out;
         private System.Windows.Forms.ToolStripStatusLabel zoom_in;
         private System.Windows.Forms.ToolStripStatusLabel zoom_perc;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel templ_count;
     }
 }
 

@@ -36,7 +36,6 @@ namespace pictureFactoring
 
         //public List<Point> skel1 = new List<Point>();
 
-
         /// <summary>
         /// Шаг увеличения зоны упрощения структуры бинарной карты изображения (зоны скелетизации)
         /// </summary>
@@ -197,10 +196,12 @@ namespace pictureFactoring
         /// Список добавленных точек в методе pixels_buitifier
         /// </summary>
         public List<Point> added_points;
+
         /// <summary>
         /// Список удалённых точек в методе pixels_buitifier
         /// </summary>
         public List<Point> removed_points;
+
         /// <summary>
         /// Удаляет "мусор" из коллекции пикселей (до первого изменения)
         /// </summary>
@@ -591,15 +592,19 @@ namespace pictureFactoring
 
         public List<template> templates = new List<template>();
 
-        public string filename = "templates.xml";
+        public string filename = "templates.xml"; //имя файла с шаблонами
         public XmlSerializer formatter = new XmlSerializer(typeof(template[]));
 
+        /// <summary>
+        /// Сохраняем сгенерированные/загруженные шаблоны в файл
+        /// </summary>
+        /// <param name="temps"></param>
         public void save_templates (List<template> temps)
         {
             if (temps.Count() > 0)
             {
                 template[] _temps = temps.ToArray();
-                using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(filename, FileMode.Create))
                 {
                     formatter.Serialize(fs, _temps);
                 }
@@ -610,7 +615,10 @@ namespace pictureFactoring
             }
         }
 
-        public void load_templates ()
+        /// <summary>
+        /// Загружаем шаблоны цифр из файла
+        /// </summary>
+        public void load_templates (main_form form)
         {
             if (File.Exists(filename))
             {
@@ -628,7 +636,7 @@ namespace pictureFactoring
             {
                 templates = new List<template>();
             }
-            
+            main_form.skeletization.update_templ_count(form);
         }
 
         /// <summary>
